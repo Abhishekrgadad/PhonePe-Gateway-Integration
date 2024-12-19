@@ -1,7 +1,36 @@
 import React from 'react'
+import axios from 'axios';
 
-export default function App() {
+const App = () => {
+
+  let data = {
+    name: "abhi",
+    amount: 1,
+    Number: '999999999',
+    MID: 'MID' + Date.now(),
+    transactionId: 'T'+Date.now()
+  }
+
+  const HandleClick = async () =>{
+
+    try {
+      await axios.post('http://localhost:8000/order',data).then(res =>{
+        console.log(res.data);
+      }).catch(err =>{
+        console.log(err)
+      })
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+  }
+
   return (
-    <div>App</div>
+    <> 
+    <button onClick={HandleClick}>Pay Now</button>
+    </>
   )
 }
+
+export default App
